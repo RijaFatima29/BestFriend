@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌸 BFF Portal 🌸</title>
+  <!-- Font Awesome & Google Fonts for extra beauty -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Quicksand', 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 40%, #f48fb1 100%);
+      background-attachment: fixed;
+      position: relative;
+      overflow-x: hidden;
+      transition: background 0.8s ease;
+    }
+
+    /* Animated background particles */
+    body::before {
+      content: "🌸 🌺 🌸 🌺 🌸 🌺 🌸 🌺 🌸 🌺 🌸 🌺 🌸 🌺 🌸 🌺";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      font-size: 2.5rem;
+      letter-spacing: 60px;
+      opacity: 0.08;
+      pointer-events: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: center;
+      animation: floatBg 20s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes floatBg {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(2deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+
+    /* ----- MAIN CARD (gate) ----- */
+    .gate-card {
+      max-width: 720px;
+      width: 100%;
+      background: rgba(255, 248, 250, 0.85);
+      backdrop-filter: blur(12px);
+      border-radius: 100px 100px 100px 100px;
+      padding: 3rem 2.5rem 3.5rem;
+      box-shadow: 0 40px 80px rgba(233, 30, 99, 0.25),
+                  0 10px 30px rgba(233, 30, 99, 0.15),
+                  inset 0 2px 20px rgba(255, 255, 255, 0.6);
+      border: 2px solid rgba(255, 182, 193, 0.5);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      transition: all 0.4s ease;
+    }
+
+    .gate-card::after {
+      content: "";
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      border-radius: 102px;
+      background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1, #fbc2eb);
+      background-size: 400% 400%;
+      z-index: -1;
+      animation: gradientBorder 6s ease infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes gradientBorder {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .gate-icon {
+      font-size: 4.8rem;
+      color: #ec407a;
+      filter: drop-shadow(0 8px 20px rgba(233, 30, 99, 0.3));
+      margin-bottom: 0.2rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 4rem;
+      font-weight: 700;
+      color: #880e4f;
+      text-shadow: 0 4px 20px rgba(233, 30, 99, 0.2);
+      margin: 0.2rem 0 0.1rem;
+      letter-spacing: 2px;
+    }
+
+    .sub-gate {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #ad1457;
+      background: rgba(255, 182, 193, 0.3);
+      display: inline-block;
+      padding: 0.5rem 2.2rem;
+      border-radius: 60px;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 182, 193, 0.4);
+      margin-bottom: 2rem;
+      letter-spacing: 1px;
+    }
+
+    .question-box {
+      background: rgba(255, 228, 235, 0.5);
+      border-radius: 70px 70px 40px 40px;
+      padding: 2rem 1.8rem;
+      margin: 1.2rem 0 2.2rem;
+      border: 2px solid rgba(244, 143, 177, 0.4);
+      box-shadow: inset 0 4px 20px rgba(255, 182, 193, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .question-box::before {
+      content: "✨";
+      position: absolute;
+      top: -10px;
+      right: 20px;
+      font-size: 2.5rem;
+      opacity: 0.3;
+    }
+
+    .question-box p {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #4a1a2e;
+      line-height: 1.4;
+    }
+
+    .question-box i {
+      color: #ec407a;
+      margin: 0 8px;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1.8rem 2.5rem;
+      margin: 2rem 0 1rem;
+    }
+
+    .gate-btn {
+      border: none;
+      padding: 1rem 3rem;
+      border-radius: 80px;
+      font-size: 1.6rem;
+      font-weight: 700;
+      box-shadow: 0 10px 0 #c2185b, 0 15px 35px rgba(233, 30, 99, 0.25);
+      cursor: pointer;
+      transition: all 0.08s linear;
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      letter-spacing: 1px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      position: relative;
+    }
+
+    .gate-btn:active {
+      transform: translateY(10px);
+      box-shadow: 0 4px 0 #880e4f;
+    }
+
+    .btn-yes {
+      background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+      color: #880e4f;
+    }
+
+    .btn-yes i {
+      color: #ec407a;
+      font-size: 2rem;
+    }
+
+    .btn-yes:hover {
+      transform: scale(1.03);
+      background: linear-gradient(135deg, #f8bbd0, #f48fb1);
+    }
+
+    .btn-no {
+      background: linear-gradient(135deg, #ffebee, #ffcdd2);
+      color: #7f3f4f;
+    }
+
+    .btn-no i {
+      color: #d32f2f;
+      font-size: 2rem;
+    }
+
+    .btn-no:hover {
+      transform: scale(1.03);
+      background: linear-gradient(135deg, #ffcdd2, #ef9a9a);
+    }
+
+    /* ----- WELCOME CONTAINER ----- */
+    .welcome-container {
+      display: none;
+      animation: fadePop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      width: 100%;
+      max-width: 750px;
+      z-index: 1;
+    }
+
+    .welcome-container.active {
+      display: block;
+    }
+
+    @keyframes fadePop {
+      0% { opacity: 0; transform: scale(0.7) rotate(-3deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+
+    .welcome-card {
+      width: 100%;
+      background: rgba(255, 248, 250, 0.88);
+      backdrop-filter: blur(12px);
+      border-radius: 100px 100px 100px 100px;
+      padding: 3rem 2.5rem 3.5rem;
+      box-shadow: 0 40px 80px rgba(233, 30, 99, 0.25);
+      border: 3px solid rgba(255, 182, 193, 0.5);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .welcome-card::before {
+      content: "🌈 ✨ 🎉 🌸 ✨ 🌈 🎉 🌸";
+      position: absolute;
+      top: -10px;
+      left: 0;
+      width: 100%;
+      font-size: 2.5rem;
+      letter-spacing: 20px;
+      opacity: 0.1;
+      white-space: nowrap;
+      animation: slideGlow 10s linear infinite;
+    }
+
+    @keyframes slideGlow {
+      0% { transform: translateX(-50px); }
+      50% { transform: translateX(50px); }
+      100% { transform: translateX(-50px); }
+    }
+
+    .welcome-card::after {
+      content: "";
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      border-radius: 102px;
+      background: linear-gradient(45deg, #f093fb, #f5576c, #4facfe, #43e97b, #f093fb);
+      background-size: 400% 400%;
+      z-index: -1;
+      animation: gradientBorder 8s ease infinite;
+      opacity: 0.5;
+    }
+
+    .big-welcome {
+      font-size: 5rem;
+      margin-bottom: 0.2rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .welcome-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 4rem;
+      font-weight: 700;
+      color: #880e4f;
+      text-shadow: 0 4px 20px rgba(233, 30, 99, 0.2);
+      margin: 0.2rem 0;
+    }
+
+    .welcome-sub {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #ad1457;
+      background: rgba(255, 182, 193, 0.3);
+      display: inline-block;
+      padding: 0.4rem 2.2rem;
+      border-radius: 60px;
+      border: 1px solid rgba(255, 182, 193, 0.4);
+      margin: 0.3rem 0 1.8rem;
+    }
+
+    .funny-message {
+      background: linear-gradient(135deg, rgba(255, 228, 235, 0.6), rgba(248, 187, 208, 0.3));
+      border-radius: 60px 60px 30px 30px;
+      padding: 2rem 1.8rem;
+      margin: 1.5rem 0 2rem;
+      border: 2px dashed #f48fb1;
+      box-shadow: inset 0 4px 20px rgba(255, 182, 193, 0.2);
+      min-height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .funny-message p {
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: #4a1a2e;
+      line-height: 1.6;
+    }
+
+    .funny-message i {
+      color: #ec407a;
+      margin: 0 6px;
+    }
+
+    .action-welcome {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.2rem 1.8rem;
+      margin: 1.8rem 0 0.5rem;
+    }
+
+    .welcome-btn {
+      border: none;
+      padding: 0.9rem 2.2rem;
+      border-radius: 80px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #880e4f;
+      box-shadow: 0 8px 0 #c2185b, 0 12px 30px rgba(233, 30, 99, 0.2);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.08s linear;
+      background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      letter-spacing: 0.5px;
+    }
+
+    .welcome-btn:active {
+      transform: translateY(8px);
+      box-shadow: 0 3px 0 #880e4f;
+    }
+
+    .welcome-btn i {
+      font-size: 1.5rem;
+      color: #ec407a;
+    }
+
+    .welcome-btn:hover {
+      transform: scale(1.04);
+      background: linear-gradient(135deg, #f8bbd0, #f48fb1);
+    }
+
+    .footer-welcome {
+      margin-top: 2.2rem;
+      color: #ad1457;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      opacity: 0.8;
+      font-weight: 600;
+    }
+
+    .footer-welcome i {
+      color: #ec407a;
+    }
+
+    /* floating hearts */
+    .floating-heart {
+      position: fixed;
+      font-size: 2.2rem;
+      pointer-events: none;
+      animation: riseUp 3.5s ease-out forwards;
+      z-index: 999;
+      filter: drop-shadow(0 0 20px rgba(233, 30, 99, 0.4));
+    }
+
+    @keyframes riseUp {
+      0% { opacity: 1; transform: translateY(0) scale(0.3) rotate(0deg); }
+      100% { opacity: 0; transform: translateY(-450px) scale(1.8) rotate(40deg); }
+    }
+
+    /* hidden gate */
+    .gate-card.hidden-gate {
+      display: none;
+    }
+
+    /* responsive */
+    @media (max-width: 600px) {
+      .gate-card, .welcome-card { padding: 2rem 1.5rem 2.5rem; border-radius: 60px; }
+      h1, .welcome-title { font-size: 3rem; }
+      .question-box p { font-size: 1.5rem; }
+      .gate-btn { font-size: 1.3rem; padding: 0.8rem 2rem; }
+      .big-welcome { font-size: 3.8rem; }
+      .funny-message p { font-size: 1.3rem; }
+      .welcome-btn { font-size: 1rem; padding: 0.7rem 1.5rem; }
+    }
+
+    @media (max-width: 400px) {
+      h1, .welcome-title { font-size: 2.4rem; }
+      .sub-gate, .welcome-sub { font-size: 1rem; padding: 0.3rem 1.5rem; }
+      .gate-btn { font-size: 1rem; padding: 0.6rem 1.2rem; gap: 8px; }
+      .question-box p { font-size: 1.2rem; }
+      .funny-message p { font-size: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== GATE CARD ===== -->
+  <div class="gate-card" id="gateCard">
+    <div class="gate-icon">
+      <i class="fas fa-heart" style="color:#ec407a;"></i>
+      <i class="fas fa-star" style="color:#f06292; font-size:3rem; margin:0 6px;"></i>
+      <i class="fas fa-heart" style="color:#ec407a;"></i>
+    </div>
+    <h1>best ffriend</h1>
+    <div class="sub-gate"><i class="fas fa-paw"></i> only for you <i class="fas fa-paw"></i></div>
+
+    <div class="question-box">
+      <p>
+        <i class="fas fa-question-circle"></i> 
+        do you want to open this website? 
+        <i class="fas fa-question-circle"></i>
+      </p>
+    </div>
+
+    <div class="btn-group">
+      <button class="gate-btn btn-yes" id="yesBtn">
+        <i class="fas fa-check-circle"></i> yes
+      </button>
+      <button class="gate-btn btn-no" id="noBtn">
+        <i class="fas fa-times-circle"></i> no
+      </button>
+    </div>
+
+    <div style="margin-top: 1.8rem; font-size: 1.1rem; color: #ad1457; opacity: 0.7; font-weight: 600;">
+      <i class="fas fa-arrow-down"></i> choose wisely <i class="fas fa-arrow-down"></i>
+    </div>
+  </div>
+
+  <!-- ===== WELCOME CONTAINER ===== -->
+  <div class="welcome-container" id="welcomeContainer">
+    <div class="welcome-card">
+      <div class="big-welcome">🌈🎉✨</div>
+      <div class="welcome-title">you said YES!</div>
+      <div class="welcome-sub"><i class="fas fa-crown"></i> welcome, bestie <i class="fas fa-crown"></i></div>
+
+      <div class="funny-message" id="funnyMessage">
+        <p>
+          <i class="fas fa-quote-left" style="opacity:0.4;"></i>
+          you're the <strong>funniest</strong> and <strong>cutest</strong> human 
+          <i class="fas fa-heart" style="color:#ec407a;"></i> 
+          i'm so lucky to have you! 
+          <i class="fas fa-quote-right" style="opacity:0.4;"></i>
+        </p>
+        <p style="margin-top:8px; font-size:1.3rem; opacity:0.8;">
+          <i class="fas fa-laugh-squint"></i>  you make life 100x better  <i class="fas fa-laugh-squint"></i>
+        </p>
+      </div>
+
+      <div class="action-welcome">
+        <button class="welcome-btn" id="hugWelcomeBtn"><i class="fas fa-hand-holding-heart"></i> hug</button>
+        <button class="welcome-btn" id="heartWelcomeBtn"><i class="fas fa-heart"></i> hearts</button>
+        <button class="welcome-btn" id="funnyWelcomeBtn"><i class="fas fa-smile-wink"></i> funny</button>
+        <button class="welcome-btn" id="sparkleWelcomeBtn"><i class="fas fa-sparkles"></i> sparkle</button>
+      </div>
+
+      <div class="footer-welcome">
+        <i class="fas fa-rainbow"></i>
+        <span>made with all my love & laughter</span>
+        <i class="fas fa-rainbow" style="transform:scaleX(-1);"></i>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      "use strict";
+
+      const gateCard = document.getElementById('gateCard');
+      const welcomeContainer = document.getElementById('welcomeContainer');
+      const yesBtn = document.getElementById('yesBtn');
+      const noBtn = document.getElementById('noBtn');
+      const funnyMessage = document.getElementById('funnyMessage');
+
+      const hugWelcomeBtn = document.getElementById('hugWelcomeBtn');
+      const heartWelcomeBtn = document.getElementById('heartWelcomeBtn');
+      const funnyWelcomeBtn = document.getElementById('funnyWelcomeBtn');
+      const sparkleWelcomeBtn = document.getElementById('sparkleWelcomeBtn');
+
+      // ----- floating hearts (rain) with extra sparkle -----
+      function createHeartRain(count = 35, emojiSet = null) {
+        const emojis = emojiSet || ['❤️', '🧡', '💛', '💚', '💙', '💜', '🩷', '🤍', '🩵', '💖', '🌸', '✨', '🌟', '🌈', '🎉'];
+        for (let i = 0; i < count; i++) {
+          setTimeout(() => {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+            heart.textContent = randomEmoji;
+            const left = Math.random() * 92 + 2;
+            const size = Math.random() * 2.6 + 1.4;
+            heart.style.left = left + '%';
+            heart.style.fontSize = size + 'rem';
+            heart.style.top = '95%';
+            heart.style.animationDuration = (Math.random() * 2.8 + 2.5) + 's';
+            heart.style.transform = `rotate(${Math.random() * 80 - 40}deg)`;
+            document.body.appendChild(heart);
+            setTimeout(() => { if (heart.parentNode) heart.remove(); }, 4200);
+          }, i * 60);
+        }
+      }
+
+      // ----- funny messages array (more beautiful) -----
+      const funnyMessages = [
+        { emoji: '😂', text: 'you are my favorite weirdo and i love it' },
+        { emoji: '🤣', text: 'i laugh 100x more with you around' },
+        { emoji: '😜', text: 'you are the peanut to my butter' },
+        { emoji: '🥳', text: 'life is a party and you are the DJ' },
+        { emoji: '🦄', text: 'you are magical and wonderfully crazy' },
+        { emoji: '🍕', text: 'you are cheesier than pizza (and i adore it)' },
+        { emoji: '🐶', text: 'you have golden retriever energy — pure joy' },
+        { emoji: '🤡', text: 'you make me smile like a happy clown' },
+        { emoji: '🐥', text: 'you are a little ray of sunshine' },
+        { emoji: '🧁', text: 'sweeter than a cupcake with sprinkles' },
+        { emoji: '🌺', text: 'you are beautiful inside and out' },
+        { emoji: '🦋', text: 'you make everything more colorful' }
+      ];
+
+      // ----- update funny message -----
+      function updateFunnyMessage() {
+        const randomIndex = Math.floor(Math.random() * funnyMessages.length);
+        const msg = funnyMessages[randomIndex];
+        funnyMessage.innerHTML = `
+          <p style="font-size:1.7rem;">
+            <span style="font-size:3rem; display:inline-block; margin-right:12px;">${msg.emoji}</span>
+            ${msg.text}
+          </p>
+          <p style="margin-top:8px; font-size:1.2rem; opacity:0.8;">
+            <i class="fas fa-heart" style="color:#ec407a;"></i> 
+            you are the best <i class="fas fa-heart" style="color:#ec407a;"></i>
+          </p>
+        `;
+      }
+
+      // ----- show welcome -----
+      function showWelcome() {
+        gateCard.classList.add('hidden-gate');
+        welcomeContainer.classList.add('active');
+        createHeartRain(45);
+        updateFunnyMessage();
+        document.body.style.background = 'linear-gradient(135deg, #fce4ec 0%, #f8bbd0 30%, #f48fb1 70%, #f06292 100%)';
+        // extra sparkle after 1s
+        setTimeout(() => createHeartRain(20, ['✨', '🌟', '💫', '🌈']), 800);
+      }
+
+      // ----- NO button (dramatic + beautiful) -----
+      function handleNo() {
+        const questionBox = document.querySelector('.question-box p');
+        questionBox.innerHTML = `
+          <i class="fas fa-exclamation-circle" style="color:#d32f2f;"></i> 
+          HOW DARE YOU?! 
+          <i class="fas fa-exclamation-circle" style="color:#d32f2f;"></i>
+        `;
+        questionBox.style.background = 'rgba(255, 205, 210, 0.3)';
+        
+        noBtn.innerHTML = `<i class="fas fa-undo-alt"></i> go back`;
+        noBtn.style.background = 'linear-gradient(135deg, #ffcdd2, #ef9a9a)';
+        noBtn.style.boxShadow = '0 10px 0 #b71c1c';
+
+        const newNoBtn = noBtn.cloneNode(true);
+        noBtn.parentNode.replaceChild(newNoBtn, noBtn);
+
+        newNoBtn.addEventListener('click', function() {
+          const qBox = document.querySelector('.question-box p');
+          qBox.innerHTML = `
+            <i class="fas fa-question-circle"></i> 
+            do you want to open this website? 
+            <i class="fas fa-question-circle"></i>
+          `;
+          qBox.style.background = 'rgba(255, 228, 235, 0.5)';
+          newNoBtn.innerHTML = `<i class="fas fa-times-circle"></i> no`;
+          newNoBtn.style.background = 'linear-gradient(135deg, #ffebee, #ffcdd2)';
+          newNoBtn.style.boxShadow = '0 10px 0 #c2185b';
+          newNoBtn.addEventListener('click', handleNo);
+          const yesRef = document.getElementById('yesBtn');
+          if (yesRef) {
+            yesRef.addEventListener('click', showWelcome);
+          }
+          // reset yes button if changed
+          const yesBtnRef = document.getElementById('yesBtn');
+          if (yesBtnRef) {
+            yesBtnRef.innerHTML = `<i class="fas fa-check-circle"></i> yes`;
+            yesBtnRef.style.background = 'linear-gradient(135deg, #fce4ec, #f8bbd0)';
+          }
+        });
+
+        const yesBtnRef = document.getElementById('yesBtn');
+        if (yesBtnRef) {
+          yesBtnRef.innerHTML = `<i class="fas fa-heart"></i> please yes`;
+          yesBtnRef.style.background = 'linear-gradient(135deg, #f8bbd0, #f48fb1)';
+          yesBtnRef.addEventListener('click', showWelcome);
+        }
+
+        createHeartRain(25, ['❤️', '💔', '😱', '😤']);
+      }
+
+      // ----- BIND EVENTS -----
+      yesBtn.addEventListener('click', showWelcome);
+      noBtn.addEventListener('click', handleNo);
+
+      // ----- WELCOME BUTTONS -----
+      hugWelcomeBtn.addEventListener('click', function() {
+        createHeartRain(35);
+        funnyMessage.innerHTML = `
+          <p style="font-size:1.6rem;">
+            <span style="font-size:3.5rem;">🤗</span> 
+            sending you the biggest warm hug ever!
+          </p>
+          <p style="margin-top:8px; font-size:1.2rem;">
+            <i class="fas fa-heart" style="color:#ec407a;"></i> 
+            you are so incredibly loved 
+            <i class="fas fa-heart" style="color:#ec407a;"></i>
+          </p>
+        `;
+      });
+
+      heartWelcomeBtn.addEventListener('click', function() {
+        createHeartRain(55);
+        funnyMessage.innerHTML = `
+          <p style="font-size:1.6rem;">
+            <span style="font-size:3.5rem;">💕</span> 
+            look at all this love for you!
+          </p>
+          <p style="margin-top:8px; font-size:1.2rem;">
+            <i class="fas fa-star" style="color:#f7b731;"></i> 
+            you deserve every single one 
+            <i class="fas fa-star" style="color:#f7b731;"></i>
+          </p>
+        `;
+      });
+
+      funnyWelcomeBtn.addEventListener('click', function() {
+        updateFunnyMessage();
+        createHeartRain(25);
+      });
+
+      sparkleWelcomeBtn.addEventListener('click', function() {
+        createHeartRain(50, ['✨', '🌟', '💫', '🌈', '⭐', '🎆', '🌠']);
+        funnyMessage.innerHTML = `
+          <p style="font-size:1.6rem;">
+            <span style="font-size:3.5rem;">✨</span> 
+            you are pure magic and sparkle!
+          </p>
+          <p style="margin-top:8px; font-size:1.2rem;">
+            <i class="fas fa-sparkles" style="color:#f7b731;"></i> 
+            the world is brighter with you 
+            <i class="fas fa-sparkles" style="color:#f7b731;"></i>
+          </p>
+        `;
+      });
+
+      // ----- double click on welcome card for surprise -----
+      document.querySelector('.welcome-card')?.addEventListener('dblclick', function() {
+        updateFunnyMessage();
+        createHeartRain(35, ['🎉', '🎊', '✨', '🌟', '💖']);
+      });
+
+      // ----- double click on gate card for fun -----
+      document.querySelector('.gate-card')?.addEventListener('dblclick', function() {
+        createHeartRain(25);
+      });
+
+      // ----- auto sparkle after 3s if gate still open -----
+      setTimeout(() => {
+        if (!gateCard.classList.contains('hidden-gate')) {
+          createHeartRain(12, ['✨', '🌸', '💕']);
+        }
+      }, 3000);
+
+    })();
+  </script>
+
+</body>
+</html>
